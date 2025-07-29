@@ -4,8 +4,7 @@ import pickle
 import os
 import requests
 
-# Ensure models directory exists
-os.makedirs('models', exist_ok=True)
+
 
 # Google Drive links
 SIM_MATRIX_URL = "https://drive.google.com/uc?id=1jHSjABmxE_1E6k7uNyewi2EM2joq3imx"
