@@ -4,7 +4,7 @@ import pickle
 import os
 import requests
 
-# Google Drive links (only the big files)
+# Google Drive links (only the large files)
 SIM_MATRIX_URL = "https://drive.google.com/uc?id=1jHSjABmxE_1E6k7uNyewi2EM2joq3imx"
 CSV_URL = "https://drive.google.com/uc?id=1GxaqWy0Lb2zO6jSlgR-GQTi2FrMEf8U0"
 
@@ -21,22 +21,27 @@ def download_file(url, path):
             f.write(r.content)
         st.success(f"{os.path.basename(path)} downloaded.")
 
-# Download the large files
+# 📥 Download large files from Google Drive
 download_file(SIM_MATRIX_URL, SIM_MATRIX_PATH)
 download_file(CSV_URL, CSV_PATH)
 
-# Load directly uploaded model files
+# ✅ Load downloaded files
+with open(SIM_MATRIX_PATH, "rb") as f:
+    similarity_df = pickle.load(f)
+
+# ✅ Validate that the similarity matrix is a DataFrame
+if not isinstance(similarity_df, pd.DataFrame):
+    st.error("Loaded similarity matrix is not a DataFrame. Please check the file.")
+    st.stop()
+
+df = pd.read_csv(CSV_PATH)
+
+# ✅ Load uploaded model files
 with open("kmeans_model.pkl", "rb") as f:
     kmeans = pickle.load(f)
 
 with open("scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
-
-# Load downloaded files
-with open(SIM_MATRIX_PATH, "rb") as f:
-    similarity_df = pickle.load(f)
-
-df = pd.read_csv(CSV_PATH)
 
 # Create mappings
 product_lookup = df[['StockCode', 'Description']].drop_duplicates().set_index('StockCode')['Description'].to_dict()
