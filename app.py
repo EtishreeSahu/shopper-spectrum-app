@@ -4,11 +4,11 @@ import pickle
 import os
 import requests
 
-# Google Drive links (only the large files)
-SIM_MATRIX_URL = "https://drive.google.com/uc?id=1jHSjABmxE_1E6k7uNyewi2EM2joq3imx"
+# Updated Google Drive links
+SIM_MATRIX_URL = "https://drive.google.com/uc?id=19lM8ZcjPJtesUSFpaTySfb2-zOezxxx9"
 CSV_URL = "https://drive.google.com/uc?id=1GxaqWy0Lb2zO6jSlgR-GQTi2FrMEf8U0"
 
-# Local file paths
+# File paths
 SIM_MATRIX_PATH = "similarity_matrix.pkl"
 CSV_PATH = "ecommerce_data_cleaned.csv"
 
@@ -21,22 +21,25 @@ def download_file(url, path):
             f.write(r.content)
         st.success(f"{os.path.basename(path)} downloaded.")
 
-# 📥 Download large files from Google Drive
+# Download large files
 download_file(SIM_MATRIX_URL, SIM_MATRIX_PATH)
 download_file(CSV_URL, CSV_PATH)
 
-# ✅ Load downloaded files
-with open(SIM_MATRIX_PATH, "rb") as f:
-    similarity_df = pickle.load(f)
-
-# ✅ Validate that the similarity matrix is a DataFrame
-if not isinstance(similarity_df, pd.DataFrame):
-    st.error("Loaded similarity matrix is not a DataFrame. Please check the file.")
+# Load the correct similarity matrix
+try:
+    with open(SIM_MATRIX_PATH, "rb") as f:
+        similarity_df = pickle.load(f)
+    if not isinstance(similarity_df, pd.DataFrame):
+        st.error("Loaded similarity matrix is not a DataFrame.")
+        st.stop()
+except Exception as e:
+    st.error(f"Error loading similarity matrix: {e}")
     st.stop()
 
+# Load dataset
 df = pd.read_csv(CSV_PATH)
 
-# ✅ Load uploaded model files
+# Load model files (uploaded directly to GitHub)
 with open("kmeans_model.pkl", "rb") as f:
     kmeans = pickle.load(f)
 
