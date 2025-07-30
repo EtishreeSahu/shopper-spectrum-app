@@ -1,8 +1,3 @@
-Absolutely! Here's your final **`README.md`** — just copy and paste it directly into your GitHub repo:
-
----
-
-```markdown
 # 🛒 Shopper Spectrum
 
 **Shopper Spectrum** is an intelligent product recommendation system that uses machine learning to suggest similar products based on user input. It analyzes product purchase patterns from an e-commerce dataset and recommends items using clustering and similarity scoring.
@@ -32,18 +27,16 @@ Absolutely! Here's your final **`README.md`** — just copy and paste it directl
 ## 📁 Project Structure
 
 ```
-
 shopper-spectrum-app/
 │
 ├── app.py                     # Streamlit web app
-├── kmeans\_model.pkl           # Trained KMeans model
+├── kmeans_model.pkl           # Trained KMeans model
 ├── scaler.pkl                 # Fitted StandardScaler
-├── similarity\_matrix.pkl      # Similarity matrix (downloaded via gdown)
-├── ecommerce\_data\_cleaned.csv # E-commerce dataset (from Google Drive)
+├── similarity_matrix.pkl      # Similarity matrix (downloaded via gdown)
+├── ecommerce_data_cleaned.csv # E-commerce dataset (from Google Drive)
 ├── requirements.txt           # Python package dependencies
 └── README.md                  # Project readme (this file)
-
-````
+```
 
 ---
 
@@ -54,7 +47,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/etishreesahu/shopper-spectrum-app.git
 cd shopper-spectrum-app
-````
+```
 
 Install the dependencies:
 
@@ -76,20 +69,13 @@ streamlit run app.py
 
 These large files are hosted on Google Drive and will be downloaded when the app runs:
 
-* `similarity_matrix.pkl`
-* `ecommerce_data_cleaned.csv`
+- `similarity_matrix.pkl`
+- `ecommerce_data_cleaned.csv`
 
 ---
 
 ## 👩‍💻 Author
 
-**Etishree Sahu**
-Aspiring AI/ML Engineer | Passionate about product intelligence & UI design
+**Etishree Sahu**  
+Aspiring AI/ML Engineer | Passionate about product intelligence & UI design  
 GitHub: [@etishreesahu](https://github.com/etishreesahu)
-
----
-
-```
-
-Let me know if you want a `requirements.txt` refresher too or a badge-style header!
-```
